@@ -1,0 +1,46 @@
+payload:
+  - DOMAIN-KEYWORD,readthedocs
+  - DOMAIN-KEYWORD,ipfs
+
+  - DOMAIN-SUFFIX,binance.org
+  - DOMAIN-SUFFIX,binance.com
+  - DOMAIN-SUFFIX,bscscan.com
+  - DOMAIN-SUFFIX,bnbchain.org
+  - DOMAIN-SUFFIX,bnappzh.mobi
+  - DOMAIN-SUFFIX,bnbstatic.com
+  - DOMAIN-SUFFIX,binance.me
+  - DOMAIN-SUFFIX,binance.cloud
+  - DOMAIN-SUFFIX,moralis.io
+  - DOMAIN-SUFFIX,defibit.io
+  - DOMAIN-SUFFIX,ninicoin.io
+  - DOMAIN-SUFFIX,nodereal.io
+  - DOMAIN-SUFFIX,ethereum.org
+  - DOMAIN-SUFFIX,kraken.com
+  - DOMAIN-SUFFIX,bntrace.com
+  - DOMAIN-SUFFIX,coingecko.com
+  - DOMAIN-SUFFIX,cryptocompare.com
+  - DOMAIN-SUFFIX,codefi.network
+  - DOMAIN-SUFFIX,api.wisdom.sh
+  - DOMAIN-SUFFIX,gateway.originprotocol.com
+  - DOMAIN-SUFFIX,gateway.serph.network
+  - DOMAIN-SUFFIX,branch.io
+
+  - DOMAIN-SUFFIX,onfastspring.com
+  - DOMAIN-SUFFIX,fastspring.com
+  - DOMAIN-SUFFIX,paddle.com
+  - DOMAIN-SUFFIX,payproglobal.com
+  - DOMAIN-SUFFIX,shareit.com
+
+  - DOMAIN-SUFFIX,paragon-software.com
+  - DOMAIN-SUFFIX,daisydiskapp.com
+  - DOMAIN-SUFFIX,tracker-software.com
+  - DOMAIN-SUFFIX,faststonesoft.net
+  - DOMAIN-SUFFIX,faststone.org
+  - DOMAIN-SUFFIX,vandyke.com
+  - DOMAIN-SUFFIX,navicat.com
+
+  - DOMAIN-SUFFIX,bing.com
+  - DOMAIN-SUFFIX,bing.net
+  - DOMAIN-SUFFIX,clarity.ms
+  - DOMAIN-SUFFIX,intellij.net
+  - DOMAIN-SUFFIX,grazie.ai
