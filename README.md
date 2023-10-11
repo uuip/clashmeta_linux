@@ -13,7 +13,7 @@
 使用的[Clash.Meta](https://github.com/MetaCubeX/Clash.Meta) 能比较完美的解决上述各问题。
 本仓库将各种配置都写好，只需添加代理服务的地址；不需要export https_proxy，且国内IP走直连。
 
-1. git clone https://ghproxy.com/https://github.com/uuip/clashmeta_linux
+1. `git clone https://ghproxy.com/https://github.com/uuip/clashmeta_linux`
 2. 在config.yaml中 **proxy-providers**:url 添加clash代理的订阅地址
 3. 以root权限运行 ./clash.meta-linux-amd64 -d .
 4. 可以访问 http://ip:9090/ui 查看代理状态和切换代理，密码配置config.yaml: line 42-44。
