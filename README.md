@@ -17,7 +17,7 @@
 * **只需添加代理服务的地址**
 
 ### 使用步骤
-1. `git clone https://ghproxy.com/https://github.com/uuip/clashmeta_linux`
+1. `git clone https://mirror.ghproxy.com/https://github.com/uuip/clashmeta_linux`
 2. 在config.yaml中 **proxy-providers**:url 添加clash代理的订阅地址
 3. 以root权限运行 ./clash.meta-linux-amd64 -d .
 4. [可选] 访问 http://ip:9090/ui 查看代理状态和切换代理，密码配置config.yaml: line 42-44。
