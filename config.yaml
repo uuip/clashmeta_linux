@@ -1,0 +1,176 @@
+######### 锚点 start #######
+
+#这里是订阅更新和延迟测试相关的
+p: &p
+  type: http
+  interval: 14400
+  health-check:
+    enable: true
+    url: https://www.gstatic.com/generate_204
+    interval: 1200
+
+use: &use
+  type: select
+  use:
+    - flower
+    - imm
+
+######### 锚点 end #######
+
+# url 里填写自己的订阅,名称不能重复, 与use: &use 中的引用要一致
+proxy-providers:
+  flower:
+    <<: *p
+    url: ""
+    #    filter: "(?i)港|hk|hongkong|hong kong"
+    exclude-filter: "实验|Expire|Traffic"
+
+  imm:
+    <<: *p
+    url: ""
+
+mode: rule
+ipv6: true
+log-level: info
+unified-delay: false
+tcp-concurrent: true
+
+allow-lan: false
+bind-address: 127.0.0.1
+mixed-port: 1090
+
+external-controller: 0.0.0.0:9090
+external-ui: web
+secret: "asdf"
+
+geodata-mode: false
+geo-auto-update: true
+geo-update-interval: 24
+geox-url:
+  geoip: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb: "https://mirror.ghproxy.com/https://github.com/Hackl0us/GeoIP2-CN/raw/release/Country.mmdb"
+
+find-process-mode: strict
+global-client-fingerprint: chrome
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+sniffer:
+  enable: true
+  sniff:
+    TLS:
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+
+tun:
+  enable: true
+  stack: system
+  dns-hijack:
+    - "any:53"
+  auto-route: true
+  auto-detect-interface: true
+#interface-name: ens33
+
+dns:
+  enable: true
+  listen: :1053
+  ipv6: true
+  use-hosts: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 28.0.0.1/8
+  fake-ip-filter:
+    - "*"
+    - "+.lan"
+    - "+.local"
+    - "*.msftconnecttest.com"
+    - "*.msftncsi.com"
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - "tls://8.8.4.4#dns"
+    - "tls://1.0.0.1#dns"
+    - 223.5.5.5
+    - https://dns.alidns.com/dns-query
+  proxy-server-nameserver:
+    - https://doh.pub/dns-query
+  nameserver-policy:
+    "geosite:cn,private":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
+
+proxy-groups:
+  - {
+      name: PROXY,
+      type: select,
+      proxies: [自动选择, 香港, 日本, 台湾, 新加坡, 美国, 其它地区, 全部节点],
+    }
+
+  - { name: dns, type: select, proxies: [香港, 日本] }
+
+  #分隔,下面是地区分组
+  - { name: 香港, <<: *use, filter: "(?i)港|hk|hongkong|hong kong" }
+
+  - { name: 台湾, <<: *use, filter: "(?i)台|tw|taiwan" }
+
+  - { name: 日本, <<: *use, filter: "(?i)日本|jp|japan" }
+
+  - { name: 美国, <<: *use, filter: "(?i)美|us|unitedstates|united states" }
+
+  - { name: 新加坡, <<: *use, filter: "(?i)(新|sg|singapore)" }
+
+  - {
+      name: 其它地区,
+      <<: *use,
+      filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*",
+    }
+
+  - { name: 全部节点, <<: *use }
+
+  - {
+      name: 自动选择,
+      <<: *use,
+      lazy: false,
+      filter: "(?i)港|hk|hongkong|hong kong|日本|jp|japan",
+      tolerance: 20,
+      type: url-test,
+      interval: 1200,
+    }
+
+rule-providers:
+  direct:
+    behavior: classical
+    type: file
+    path: ./rules/direct.yaml
+  proxy:
+    behavior: classical
+    type: file
+    path: ./rules/proxy.yaml
+  reject:
+    behavior: classical
+    type: file
+    path: ./rules/reject.yaml
+  audit:
+    behavior: classical
+    type: file
+    path: ./rules/audit.yaml
+  us:
+    behavior: classical
+    type: file
+    path: ./rules/us.yaml
+
+rules:
+  - RULE-SET,reject,REJECT
+  - DOMAIN,api.immtel.co,DIRECT
+  - DOMAIN-SUFFIX,zsfjro.sbs,DIRECT
+  - RULE-SET,direct,DIRECT
+  - RULE-SET,us,美国
+  - RULE-SET,proxy,PROXY
+  - RULE-SET,audit,PROXY
+  - GEOIP,CN,DIRECT
+  - MATCH,PROXY

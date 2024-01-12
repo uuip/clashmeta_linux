@@ -1,0 +1,20 @@
+payload:
+  - DOMAIN-SUFFIX,qq.com
+  - DOMAIN-SUFFIX,smtcdns.com
+  - DOMAIN-SUFFIX,gtimg.cn
+  - DOMAIN-SUFFIX,cdn-go.cn
+  - DOMAIN-SUFFIX,scorecardresearch.com
+  - DOMAIN-SUFFIX,jd.com
+  - DOMAIN-SUFFIX,baidu.com
+  - DOMAIN-SUFFIX,youku.com
+  - DOMAIN-SUFFIX,163.com
+  - DOMAIN-KEYWORD,alipay
+  - DOMAIN-KEYWORD,.cn
+  - IP-CIDR,127.0.0.0/8,no-resolve
+  - IP-CIDR,10.0.0.0/8,no-resolve
+  - IP-CIDR,172.16.0.0/12,no-resolve
+  - IP-CIDR,192.168.0.0/16,no-resolve
+  - IP-CIDR,123.60.114.0/24,no-resolve
+  - PROCESS-NAME,ShadowsocksR.exe
+  - PROCESS-NAME,WeChat.exe
+  - PROCESS-NAME,Bypass.exe
