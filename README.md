@@ -21,3 +21,6 @@
 2. 在config.yaml中 **proxy-providers**:url 添加clash代理的订阅地址
 3. 以root权限运行 ./mihomo-linux-amd64 -d .
 4. [可选] 访问 http://ip:9090/ui 查看代理状态和切换代理，密码配置config.yaml: line 42-44。
+
+### 已知问题
+- 使用tun模式启动时，外网无法访问docker提供的服务；停止后回复正常。
